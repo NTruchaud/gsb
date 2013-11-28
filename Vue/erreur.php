@@ -1,5 +1,4 @@
 <?php $this->titre = "Erreur !"; ?>
-
 <div class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Lien de retour à la page d'accueil -->
     <a class="navbar-brand" href="">GSB-CR</a>

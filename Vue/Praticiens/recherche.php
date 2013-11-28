@@ -14,7 +14,7 @@ require 'Vue/_Commun/navigation.php';
                 <div class="col-sm-5 col-md-4">
                     <select class="form-control" name="id">
                         <?php foreach ($praticiens as $praticien) : ?>
-                            <option value="<?= $this->nettoyer($praticien['idPraticien']) ?>"><?= $this->nettoyer($praticien['nom']) ?></option>
+                            <option value="<?= $this->nettoyer($praticien['idPraticien']) ?>"><?= $this->nettoyer($praticien['nom']) ?> <?= $this->nettoyer($praticien['prenom']) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
