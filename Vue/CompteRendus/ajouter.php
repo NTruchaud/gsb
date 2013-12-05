@@ -1,7 +1,16 @@
-<?php
+<?php $this->titre = "Compte-rendus"; ?>
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+<?php
+$menuCompteRendu = true;
+require_once 'Vue/_Commun/navigation.php';
 ?>
+
+<div class="container">
+    <h2 class="text-center">Nouveau compte-rendu de visite</h2>
+    <div class="well">
+        <div class="alert alert-success">
+            <?= $message ?>
+        </div>
+
+    </div>
+</div>
