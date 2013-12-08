@@ -25,17 +25,27 @@ class ControleurCompteRendus extends ControleurSecurise {
             $message = 'Le compte-rendu a bien été ajouté';
             $praticiens = $this->praticien->getPraticiens();
             $idVisiteur = $this->requete->getSession()->getAttribut("idVisiteur");
-            $compteRendus = $this->compteRendu->setCompteRendu($this->requete->getParametre('idPraticien'), $idVisiteur, $this->requete->getParametre('dateRapport'),
-                    $this->requete->getParametre('bilan'), $this->requete->getParametre('motif'));
+            $compteRendus = $this->compteRendu->setCompteRendu($this->requete->getParametre('idPraticien'), $idVisiteur, $this->requete->getParametre('dateRapport'), $this->requete->getParametre('bilan'), $this->requete->getParametre('motif'));
         }
         else
-            throw new Exception("Le compte rendu n'a pas pu etre ajouté");
+            throw new Exception("Le compte rendu n'a pas pu être ajouté");
         $this->genererVue(array('praticiens' => $praticiens, 'compteRendus' => $compteRendus, 'message' => $message));
     }
-    
-    public function consulter()
-    {
+
+    public function consulter() {
         $compteRendus = $this->compteRendu->consultCompteRendu();
+        $this->genererVue(array('compteRendus' => $compteRendus));
+    }
+
+    public function supprimer() {
+
+        // if ($this->requete->existeParametre('idCompteRendu')) {
+        $idRapport = $this->requete->getParametre('id');
+        $supprCR = $this->compteRendu->supprimerCompteRendu($idRapport);
+        $compteRendus = $this->compteRendu->consultCompteRendu();
+        //}
+        /* else
+          throw new Exception('La suppression n\'a pas pu être effectuée'); */
         $this->genererVue(array('compteRendus' => $compteRendus));
     }
 

@@ -56,12 +56,12 @@ class Requete
      */
     public function getParametre($nom)
     {
-        if ($this->existeParametre($nom)) {
+        /*if ($this->existeParametre($nom)) {*/
             return $this->parametres[$nom];
-        }
+        /*}
         else {
             throw new Exception("Paramètre '$nom' absent de la requête");
-        }
+        }*/
     }
 
 }

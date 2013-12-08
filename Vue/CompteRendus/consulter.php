@@ -1,8 +1,8 @@
-<?php $this->titre = "Consultation des c    ompte-rendus"; ?>
+<?php $this->titre = "Consultation des compte-rendus"; ?>
 
 <?php
 $menuCompteRendu = true;
-require 'Vue/_Commun/navigation.php';
+require_once 'Vue/_Commun/navigation.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,10 @@ require 'Vue/_Commun/navigation.php';
     </head>
     <body>
         <div class="container">
-            <?php if(isset($message))
-                echo $message;?>
+            <?php
+            if (isset($message))
+                echo $message;
+            ?>
             <h2 class="text-center">Liste de vos comptes-rendus de visite</h2>
             <div class="table-responsive">
                 <table class="table table-hover table-condensed">
@@ -29,39 +31,57 @@ require 'Vue/_Commun/navigation.php';
                     </thead>
                     <tbody>
                         <?php foreach ($compteRendus as $compteRendu): ?>
-                        <tr>
-                            <td class="vert-align"><?= $compteRendu['date'] ?></td>
-                            <td class="vert-align"><?= $compteRendu['nom'] ?></td>
-                            <td class="vert-align"><?= $compteRendu['ville'] ?></td>
-                            <td class="vert-align"><?= $compteRendu['motif'] ?></td>
-                            <td>
-                                <a href="comptesrendus/modification/<?= $compteRendu['idCompteRendu'] ?>" class="btn btn-info" title="Modifier">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                </a>
-                                <button type="button"class="btn btn-danger" title="Supprimer" data-toggle="modal" data-target="#dlgConfirmation<?= $compteRendu['idCompteRendu'] ?>">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <!-- Dialogue modal de confirmation de suppression -->
-                                <!-- Doit être numéroté pour être associé à chaque CR -->
-                                <div class="modal fade" id="dlgConfirmation<?= $compteRendu['idCompteRendu'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title" id="myModalLabel">Demande de confirmation</h4>
+                            <tr>
+                                <td class="vert-align"><?= $compteRendu['date'] ?></td>
+                                <td class="vert-align"><?= $compteRendu['nom'] ?></td>
+                                <td class="vert-align"><?= $compteRendu['ville'] ?></td>
+                                <td class="vert-align"><?= $compteRendu['motif'] ?></td>
+                                <td>
+                                    <a href="compterendus/modification/<?= $compteRendu['idCompteRendu'] ?>" class="btn btn-info" title="Modifier">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                    </a>
+                                    <button class="btn btn-danger" data-target="#dlgConfirmation<?= $compteRendu['idCompteRendu'] ?>" data-toggle="modal" title="Supprimer" type="button">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <!--                                
+                                     Dialogue modal de confirmation de suppression                                     
+                                    -->
+                                    <!--                                   
+                                     Doit être numéroté pour être associé à chaque CR                                    
+                                    -->
+                                    <div id="dlgConfirmation<?= $compteRendu['idCompteRendu'] ?>" class="modal fade" aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">
+                                                        ×
+                                                    </button>
+                                                    <h4 id="myModalLabel" class="modal-title">
+                                                        Demande de confirmation
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment supprimer ce compte-rendu ? <?= $compteRendu['idCompteRendu'] ?>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal" type="button">
+                                                        Annuler
+                                                    </button>
+                                                    <a class="btn btn-danger" href="compterendus/supprimer/<?= $compteRendu['idCompteRendu'] ?>">
+                                                        Supprimer
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                Voulez-vous vraiment supprimer ce compte-rendu ?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                                <a href="comptesrendus/supprimer/<?= $compteRendu['idCompteRendu'] ?>" class="btn btn-danger">Supprimer</a>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
-                            </td>
-                        </tr>
+                                            <!--                                  
+                                             /.modal-content                                    
+                                            --> 
+                                        </div>
+                                        <!--                                    
+                                         /.modal-dialog                                    
+                                        --> 
+                                    </div>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
