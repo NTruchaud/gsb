@@ -61,7 +61,7 @@ require_once 'Vue/_Commun/navigation.php';
                                                     </h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Voulez-vous vraiment supprimer ce compte-rendu ? <?= $compteRendu['idCompteRendu'] ?>
+                                                    Voulez-vous vraiment supprimer ce compte-rendu ?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-default" data-dismiss="modal" type="button">

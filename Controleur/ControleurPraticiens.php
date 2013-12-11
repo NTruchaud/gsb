@@ -46,25 +46,30 @@ class ControleurPraticiens extends ControleurSecurise {
         else
             throw new Exception("Action impossible : aucun praticien défini");
     }
-    
+
     public function resultats() {
-        if ($this->requete->existeParametre("idType") || $this->requete->existeParametre("nom") || $this->requete->existeParametre("ville")) {
+        if ($this->requete->existeParametre("idType")) {
             $idTypePraticien = $this->requete->getParametre("idType");
-            $nomPraticien = $this->requete->getParametre("nom");
-            $villePraticien = $this->requete->getParametre("ville");
-            
+            if ($this->requete->existeParametre("nom"))
+                $nomPraticien = $this->requete->getParametre("nom");
+            else
+                $nomPraticien = null;
+            if ($this->requete->existeParametre("ville"))
+                $villePraticien = $this->requete->getParametre("ville");
+            else
+                $villePraticien = null;
+
             $this->afficherA($idTypePraticien, $nomPraticien, $villePraticien);
         }
         else
             throw new Exception("Action impossible : aucun praticien défini");
     }
-    
-    private function afficherA($idTypePraticien, $nom, $ville)
-    {
-        $praticiens = $this->praticien->getPraticienAvancé($nom, $ville, $idTypePraticien);
-        $this->genererVue(array('praticiens' => $praticiens), "avancee");
+
+    private function afficherA($idTypePraticien, $nom, $ville) {
+        $praticiens = $this->praticien->getPraticienAvancé($idTypePraticien, $nom, $ville);
+        $this->genererVue(array('praticiens' => $praticiens), "index");
     }
-    
+
     // Affiche les détails sur un praticien
     private function afficher($idPraticien) {
         $praticien = $this->praticien->getPraticien($idPraticien);

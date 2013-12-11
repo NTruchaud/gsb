@@ -22,8 +22,7 @@ class CompteRendu extends Modele {
     
     public function supprimerCompteRendu($idRapport)
     {
-        $sql = 'DELETE id_rapport, id_praticien, id_visiteur, date_rapport, bilan, motif FROM rapport_visite 
-            WHERE id_rapport = ?';
+        $sql = 'DELETE FROM rapport_visite WHERE id_rapport = ?';
         $supprCR = $this->executerRequete($sql, array($idRapport));
     }
     

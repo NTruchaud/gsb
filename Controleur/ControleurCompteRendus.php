@@ -38,15 +38,14 @@ class ControleurCompteRendus extends ControleurSecurise {
     }
 
     public function supprimer() {
-
-        // if ($this->requete->existeParametre('idCompteRendu')) {
-        $idRapport = $this->requete->getParametre('id');
-        $supprCR = $this->compteRendu->supprimerCompteRendu($idRapport);
-        $compteRendus = $this->compteRendu->consultCompteRendu();
-        //}
-        /* else
-          throw new Exception('La suppression n\'a pas pu être effectuée'); */
-        $this->genererVue(array('compteRendus' => $compteRendus));
+        if ($this->requete->existeParametre('id')) {
+            $idRapport = $this->requete->getParametre("id");
+            $supprCR = $this->compteRendu->supprimerCompteRendu($idRapport);
+            $compteRendus = $this->compteRendu->consultCompteRendu();
+        }
+        else
+            throw new Exception('La suppression n\'a pas pu être effectuée');
+        $this->genererVue(array('compteRendus' => $compteRendus), "consulter");
     }
 
 }

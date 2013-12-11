@@ -31,11 +31,11 @@ class Praticien extends Modele {
             throw new Exception("Aucun praticien ne correspond à l'identifiant '$idPraticien'");
     }
 
-    public function getPraticienAvancé($nom, $ville, $type) {
-        $sql = $this->sqlPraticien . 'where nom_praticien = ? OR ville_praticien = ? OR TP.id_type_praticien = ?';
-        $praticien = $this->executerRequete($sql, array($nom, $ville, $type));
-        if ($praticien->rowCount() == 1)
-            return $praticien->fetch();  // Accès à la première ligne de résultat
+    public function getPraticienAvancé($type, $nom=null, $ville=null) {
+        $sql = $this->sqlPraticien . ' where TP.id_type_praticien = ? AND nom_praticien LIKE ? AND ville_praticien LIKE ?';
+        $praticien = $this->executerRequete($sql, array($type, "%$nom%", "%$ville%"));
+        if ($praticien->rowCount() > 0)
+            return $praticien;  // Accès à la première ligne de résultat
         else
             throw new Exception("Aucun praticien ne correspond aux critères de recherche définis.");
     }
