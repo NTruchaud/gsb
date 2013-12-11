@@ -9,7 +9,7 @@
                 </button><strong>
                     Erreur !
                 </strong>
-                    <?= $msgErreur ?>
+                    <?= $this->nettoyer($msgErreur) ?>
             </div>
 
         </div>

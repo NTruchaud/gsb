@@ -48,5 +48,29 @@ class ControleurCompteRendus extends ControleurSecurise {
         $this->genererVue(array('compteRendus' => $compteRendus), "consulter");
     }
 
+    public function modification() {
+        if ($this->requete->existeParametre("id")) {
+            $idRapport = $this->requete->getParametre("id");
+            $modification = $this->compteRendu->afficheModif($idRapport);
+            $this->genererVue(array('modifCR' => $modification));
+        }
+        else
+            throw new Exception('Le compte rendu' . $idRapport . 'n\'existe pas');
+    }
+
+    public function modifier() {
+        if ($this->requete->existeParametre("idCR")) {
+            $idRapport = $this->requete->getParametre("idCR");
+            $motif = $this->requete->getParametre("motif");
+            $bilan = $this->requete->getParametre("bilan");
+            $modifCompteRendu = $this->compteRendu->updateCompteRendu($idRapport, $bilan, $motif);
+            $compteRendus = $this->compteRendu->consultCompteRendu();
+            $message = 'Le modification a bien été effectuée !';
+            $this->genererVue(array('compteRendus' => $compteRendus, 'message' => $message));
+        }
+        else
+            throw new Exception("La modification n'a pas pu être effectuée.");
+    }
+
 }
 

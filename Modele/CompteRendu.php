@@ -20,6 +20,14 @@ class CompteRendu extends Modele {
             return $compteRendus;
     }
     
+    public function afficheModif($idRapport)
+    {
+        $sql = 'SELECT CR.id_rapport as idCompteRendu, CR.date_rapport as date, PR.nom_praticien as nom, PR.prenom_praticien as prenom,
+            CR.motif as motif, CR.bilan as bilan FROM rapport_visite CR JOIN praticien PR ON CR.id_praticien = PR.id_praticien WHERE CR.id_rapport = ?';
+        $afficheModif = $this->executerRequete($sql, array($idRapport))->fetch();
+        return $afficheModif;
+    }
+    
     public function supprimerCompteRendu($idRapport)
     {
         $sql = 'DELETE FROM rapport_visite WHERE id_rapport = ?';
@@ -29,7 +37,7 @@ class CompteRendu extends Modele {
     public function  updateCompteRendu($idRapport, $bilan, $motif)
     {
         $sql = 'UPDATE rapport_visite SET bilan = ?, motif = ? WHERE id_rapport = ?';
-        $updateCR = $this->executerRequete($sql, array($bilan, $motif, $idRapport));
+        $updateCR = $this->executerRequete($sql, array($idRapport, $bilan, $motif));
     }
 
 }

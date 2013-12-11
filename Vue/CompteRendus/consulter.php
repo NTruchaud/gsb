@@ -15,7 +15,7 @@ require_once 'Vue/_Commun/navigation.php';
         <div class="container">
             <?php
             if (isset($message))
-                echo $message;
+                echo $this->nettoyer($message);
             ?>
             <h2 class="text-center">Liste de vos comptes-rendus de visite</h2>
             <div class="table-responsive">
@@ -32,10 +32,10 @@ require_once 'Vue/_Commun/navigation.php';
                     <tbody>
                         <?php foreach ($compteRendus as $compteRendu): ?>
                             <tr>
-                                <td class="vert-align"><?= $compteRendu['date'] ?></td>
-                                <td class="vert-align"><?= $compteRendu['nom'] ?></td>
-                                <td class="vert-align"><?= $compteRendu['ville'] ?></td>
-                                <td class="vert-align"><?= $compteRendu['motif'] ?></td>
+                                <td class="vert-align"><?= $this->nettoyer($compteRendu['date']) ?></td>
+                                <td class="vert-align"><?= $this->nettoyer($compteRendu['nom']) ?></td>
+                                <td class="vert-align"><?= $this->nettoyer($compteRendu['ville']) ?></td>
+                                <td class="vert-align"><?= $this->nettoyer($compteRendu['motif']) ?></td>
                                 <td>
                                     <a href="compterendus/modification/<?= $compteRendu['idCompteRendu'] ?>" class="btn btn-info" title="Modifier">
                                         <span class="glyphicon glyphicon-edit"></span>
