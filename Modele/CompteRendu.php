@@ -37,7 +37,7 @@ class CompteRendu extends Modele {
     public function  updateCompteRendu($idRapport, $bilan, $motif)
     {
         $sql = 'UPDATE rapport_visite SET bilan = ?, motif = ? WHERE id_rapport = ?';
-        $updateCR = $this->executerRequete($sql, array($idRapport, $bilan, $motif));
+        $updateCR = $this->executerRequete($sql, array($bilan, $motif, $idRapport));
     }
 
 }

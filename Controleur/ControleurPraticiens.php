@@ -16,6 +16,7 @@ class ControleurPraticiens extends ControleurSecurise {
 
     // Affiche la liste des praticiens
     public function index() {
+        $typePraticien = $this->praticien->getTypesPraticiens();
         $praticiens = $this->praticien->getPraticiens();
         $this->genererVue(array('praticiens' => $praticiens, 'typePraticien' => $typePraticien));
     }
